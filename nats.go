@@ -258,7 +258,7 @@ type Options struct {
 
 	// Conn represents a pre-prepared connection to a NATS server.
 	// This will ordinarily be set to nil, but we'll use this to
-	// talk to the server instead of dialling if it is set.
+	// talk to the server instead of dialing if it is set.
 	Conn net.Conn
 
 	// Servers is a configured set of servers which this client
@@ -728,7 +728,7 @@ func Name(name string) Option {
 	}
 }
 
-// Conn is an Option to pass a custom Conn rather than dialling.
+// Conn is an Option to pass a custom Conn rather than dialing.
 // This is useful if you have retrieved an in-process connection
 // from calling server.InProcessConn() or similar.
 func InProcessConn(conn net.Conn) Option {
