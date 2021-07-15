@@ -732,9 +732,8 @@ func Name(name string) Option {
 	}
 }
 
-// Conn is an Option to pass a custom Conn rather than dialing.
-// This is useful if you have retrieved an in-process connection
-// from calling server.InProcessConn() or similar.
+// InProcessServer is an Option that will try to establish a direction to a NATS server
+// running within the process instead of dialling via TCP.
 func InProcessServer(server InProcessConnProvider) Option {
 	return func(o *Options) error {
 		o.InProcessServer = server
@@ -1653,7 +1652,8 @@ func (nc *Conn) createConn() (err error) {
 		return ErrNoServers
 	}
 
-	// If a custom conn has been provided then use that.
+	// If we have a reference to an in-process server then establish a
+	// connection using that.
 	if nc.Opts.InProcessServer != nil {
 		conn, err := nc.Opts.InProcessServer.InProcessConn()
 		if err != nil {
